@@ -1,4 +1,4 @@
-import healthRouterIoC from "./health/index.js";
-import notesRouterIoC from "./notes/index.js";
+import healthRouterIoC from "./health/healthRouter.js";
+import notesRouterIoC from "./notes/notesRouter.js";
 
 export { healthRouterIoC, notesRouterIoC };
