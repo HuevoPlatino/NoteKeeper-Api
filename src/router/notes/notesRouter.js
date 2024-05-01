@@ -6,13 +6,9 @@ import {
   getAllNotes,
   updateNote,
 } from "../../controllers/index.js";
-import notes from "../../data/index.js";
-import { inMemoryNotesRepository } from "../../repositories/inMemoryNotesRepository.js";
 
-const createNotesRouter = () => {
+const createNotesRouter = (repository) => {
   const notesRouter = Router();
-
-  const repository = inMemoryNotesRepository(notes);
 
   notesRouter.get("/", getAllNotes(repository));
   notesRouter.post("/", createNote(repository));
@@ -22,8 +18,8 @@ const createNotesRouter = () => {
   return notesRouter;
 };
 
-const notesRouterIoC = (app) => {
-  const notesRouter = createNotesRouter();
+const notesRouterIoC = (app, repository) => {
+  const notesRouter = createNotesRouter(repository);
 
   app.use("/notes", notesRouter);
 };
