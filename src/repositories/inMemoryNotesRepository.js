@@ -25,5 +25,9 @@ export const inMemoryNotesRepository = (notesCollection) => {
     findIndexNoteById(noteId) {
       return notes.findIndex((note) => note._id === noteId);
     },
+
+    removeAllNotes() {
+      notes.length = 0;
+    }
   };
 };
