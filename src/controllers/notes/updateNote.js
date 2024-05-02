@@ -1,11 +1,19 @@
-import notes from "../../data/index.js";
 import { noteMapper } from "../../mappers/index.js";
-import { checkElementExistsBasedOn } from "../../utils/index.js";
+import {
+  checkElementExistsBasedOn,
+  checkValidProperties
+} from "../../utils/index.js";
 
 const updateNote = (repository) => {
   return (req, res) => {
     const noteContent = req.body;
     const { id: noteId } = req.params;
+
+    const containsInvalidProperties = checkValidProperties(noteContent);
+
+    if (!!containsInvalidProperties) {
+      return res.status(400).json({ error: "Invalid property" });
+    }
 
     const elementIndex = repository.findIndexNoteById(noteId);
 
@@ -18,8 +26,8 @@ const updateNote = (repository) => {
     }
 
     const updatedNote = {
-      ...notes[elementIndex],
-      ...noteContent,
+      ...repository.getNote(elementIndex),
+      ...noteContent
     };
 
     repository.updateNote(elementIndex, updatedNote);
