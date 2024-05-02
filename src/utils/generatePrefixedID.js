@@ -1,19 +1,7 @@
-const characters =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-function generateRandomPrefix(length) {
-  let prefix = "";
-
-  for (let i = 0; i < length; i++) {
-    const randomCharacterIndex = Math.floor(Math.random() * characters.length);
-    prefix += characters.charAt(randomCharacterIndex);
-  }
-
-  return prefix;
-}
+import { getRandomValues } from "node:crypto";
 
 function generatePrefixedID() {
-  const randomPrefix = generateRandomPrefix(5);
+  const randomPrefix = getRandomValues(new Uint8Array(1));
 
   return `${randomPrefix}-${Date.now()}`;
 }
