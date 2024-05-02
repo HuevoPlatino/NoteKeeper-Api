@@ -47,9 +47,12 @@ const notesRepository = inMemoryNotesRepository(mockNotes);
 const notesRouter = testServer(notesRouterIoC, notesRepository);
 
 jest.mock("../../utils/index.js", () => {
+  const originalUtils = jest.requireActual("../../utils/index.js");
+
   const noteId = "mockedID-123";
 
   return {
+    ...originalUtils,
     generatePrefixedID: jest.fn().mockReturnValue(noteId)
   };
 });
