@@ -2,6 +2,13 @@ import testServer from "../../../test/testServer";
 import { inMemoryNotesRepository } from "../../repositories/inMemoryNotesRepository";
 import notesRouterIoC from "./notesRouter";
 
+jest.mock("../../utils/generatePrefixedID.js", () => {
+  const noteId = "mockedID-123";
+  return jest.fn().mockReturnValue(noteId);
+});
+
+jest.useFakeTimers("modern");
+
 const MOCKS = {
   NOTE_ID: "mockedID-123",
   DATE_NOW: 39600000
@@ -41,29 +48,29 @@ const newNoteDTO = {
   createdAt: MOCKS.DATE_NOW
 };
 
+const updatedNoteWithInvalidKey = {
+  foo: "foo"
+};
+
+const updatedNote = {
+  name: "updated name",
+  description: "updated description",
+  important: true,
+  status: "in progress",
+  dueDate: "12/12/2024"
+};
+
 const mockNotes = [initialNote];
 
 const notesRepository = inMemoryNotesRepository(mockNotes);
 const notesRouter = testServer(notesRouterIoC, notesRepository);
 
-jest.mock("../../utils/index.js", () => {
-  const originalUtils = jest.requireActual("../../utils/index.js");
-
-  const noteId = "mockedID-123";
-
-  return {
-    ...originalUtils,
-    generatePrefixedID: jest.fn().mockReturnValue(noteId)
-  };
-});
-
-jest.useFakeTimers("modern");
-
 describe("notesRouter", () => {
   const EXPECTED_STATUS = {
     OK: 200,
     CREATED: 201,
-    BAD_REQUEST: 400
+    BAD_REQUEST: 400,
+    NOT_FOUND: 404
   };
 
   const EXPECTED_ERROR_MESSAGE = {
@@ -72,11 +79,20 @@ describe("notesRouter", () => {
 
   const EXPECTED_RESPONSE_DTO = {
     READ: [initialNoteDTO],
-    CREATED: newNoteDTO
+    CREATED: newNoteDTO,
+    UPDATED: {
+      ...initialNoteDTO,
+      ...updatedNote
+    }
   };
 
   beforeEach(() => {
     jest.setSystemTime(MOCKS.DATE_NOW);
+  });
+
+  afterEach(() => {
+    notesRepository.removeAllNotes();
+    notesRepository.addNote(initialNote);
   });
 
   afterAll(() => {
@@ -166,7 +182,40 @@ describe("notesRouter", () => {
   });
 
   describe("Given PUT action", () => {
-    test.todo("When Then");
+    test("When an updated note contains a non allowed property Then response should return status 400 with expected error message", async () => {
+      const {
+        status,
+        body: { error }
+      } = await notesRouter
+        .put(`/notes/${initialNoteDTO.id}`)
+        .send(updatedNoteWithInvalidKey);
+
+      expect(status).toBe(EXPECTED_STATUS.BAD_REQUEST);
+      expect(error).toBe("Invalid property");
+    });
+
+    test("When note id does note exist Then response should return status 404 with expected error message", async () => {
+      const invalidId = "456";
+
+      const {
+        status,
+        body: { error }
+      } = await notesRouter.put(`/notes/${invalidId}`).send(updatedNote);
+
+      expect(status).toBe(EXPECTED_STATUS.NOT_FOUND);
+      expect(error).toBe(`Note with id ${invalidId} does not exist`);
+    });
+
+    test("When note id exists and keys are valid Then response should return updated note with status 200", async () => {
+      const validId = "123";
+
+      const { status, body } = await notesRouter
+        .put(`/notes/${validId}`)
+        .send(updatedNote);
+
+      expect(status).toBe(EXPECTED_STATUS.OK);
+      expect(body).toEqual(EXPECTED_RESPONSE_DTO.UPDATED);
+    });
   });
 
   describe("Given DELETE action", () => {
