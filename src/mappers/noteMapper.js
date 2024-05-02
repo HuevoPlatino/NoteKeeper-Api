@@ -1,10 +1,11 @@
-const toDTO = ({ _id, ...restOfNote }) => ({
+const toDTO = ({ _id, created_at, ...restOfNote }) => ({
   id: _id,
-  ...restOfNote,
+  createdAt: created_at,
+  ...restOfNote
 });
 
 const noteMapper = {
-  toDTO,
+  toDTO
 };
 
 export default noteMapper;
