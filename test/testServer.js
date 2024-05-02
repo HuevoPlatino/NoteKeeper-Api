@@ -1,10 +1,12 @@
 import express from "express";
 import supertest from "supertest";
 
-const testServer = (route) => {
+const testServer = (route, mockRepository = {}) => {
   const app = express();
 
-  route(app);
+  app.use(express.json());
+
+  route(app, mockRepository);
 
   return supertest(app);
 };
