@@ -11,7 +11,7 @@ const updateNote = (repository) => {
 
     const containsInvalidProperties = checkValidProperties(noteContent);
 
-    if (!!containsInvalidProperties) {
+    if (containsInvalidProperties) {
       return res.status(400).json({ error: "Invalid property" });
     }
 
