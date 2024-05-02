@@ -1,3 +1,3 @@
-import checkNoteDataIsIncomplete from "./checkNoteDataIsIncomplete";
+import checkNoteDataIsIncomplete from "./checkNoteDataIsIncomplete.js";
 
 export { checkNoteDataIsIncomplete };
