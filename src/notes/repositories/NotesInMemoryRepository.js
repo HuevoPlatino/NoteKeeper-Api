@@ -1,6 +1,6 @@
 import notes from "../data/index.js";
 
-export const inMemoryNotesRepository = () => {
+export const NotesInMemoryRepository = () => {
   return {
     getAllNotes: async () => {
       return notes;

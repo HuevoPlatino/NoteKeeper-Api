@@ -1,1 +1,1 @@
-export { inMemoryNotesRepository } from "./inMemoryNotesRepository.js";
+export { NotesInMemoryRepository } from "./NotesInMemoryRepository.js";
