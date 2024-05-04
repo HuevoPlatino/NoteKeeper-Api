@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import NotesController from "../controllers/NotesController.js";
-import { NotesInMemoryRepository } from "../repositories/NotesInMemoryRepository.js";
+import NotesInMemoryRepository from "../repositories/NotesInMemoryRepository.js";
 
 const notesInMemoryRepository = NotesInMemoryRepository();
 const notesController = NotesController(notesInMemoryRepository);
