@@ -2,20 +2,19 @@ import chalk from "chalk";
 import cors from "cors";
 import express from "express";
 
-import notes from "./src/data/index.js";
-import { inMemoryNotesRepository } from "./src/repositories/inMemoryNotesRepository.js";
-import {
-  healthRouterIoC,
-  landingRouterIoC,
-  notesRouterIoC,
-} from "./src/router/index.js";
+import healthRouterIoC from "./src/health/router/healthRouter.js";
+import landingRouterIoC from "./src/landing/router/landingRouter.js";
+import notesRouterIoC from "./src/notes/router/notesRouter.js";
+
+import { inMemoryNotesRepository } from "./src/notes/repositories/index.js";
+
 import { Logger } from "./src/utils/index.js";
 
 const PORT = process.env.PORT ?? 3001;
 const appVersion = process.env.npm_package_version;
 
 const app = express();
-const notesRepository = inMemoryNotesRepository(notes);
+const notesRepository = inMemoryNotesRepository();
 
 app.use(express.json());
 app.use(cors());
