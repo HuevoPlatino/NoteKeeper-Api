@@ -1,3 +1,6 @@
+### health check
+GET http://localhost:8080/health
+
 ### get all notes
 GET http://localhost:8080/notes
 

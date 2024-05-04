@@ -1,5 +1,13 @@
 import checkElementExistsBasedOn from "./checkElementExistsBasedOn.js";
-import generatePrefixedID from "./generateID.js";
+import checkNoteDataIsIncomplete from "./checkNoteDataIsIncomplete.js";
+import checkValidProperties from "./checkValidProperties.js";
+import generatePrefixedID from "./generatePrefixedID.js";
 import Logger from "./logger.js";
 
-export { Logger, checkElementExistsBasedOn, generatePrefixedID };
+export {
+  Logger,
+  checkElementExistsBasedOn,
+  checkNoteDataIsIncomplete,
+  checkValidProperties,
+  generatePrefixedID
+};
