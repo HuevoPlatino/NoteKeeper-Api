@@ -3,7 +3,7 @@ import notes from "../data";
 import NotesInMemoryRepository from "../repositories/NotesInMemoryRepository.js";
 import notesRouterIoC from "./notesRouter";
 
-jest.mock("../utils/generatePrefixedID.js", () => {
+jest.mock("../utils/generateUUID.js", () => {
   const noteId = "mockedID-123";
   return jest.fn().mockReturnValue(noteId);
 });
