@@ -5,7 +5,7 @@ import {
 } from "../../utils/index.js";
 
 const createNote = (repository) => {
-  return (req, res) => {
+  return async (req, res) => {
     const note = req.body;
 
     const isNoteDataIncomplete = checkNoteDataIsIncomplete(note);
@@ -20,7 +20,7 @@ const createNote = (repository) => {
       created_at: Date.now()
     };
 
-    repository.addNote(newNote);
+    await repository.addNote(newNote);
 
     const noteDTO = noteMapper.toDTO(newNote);
 

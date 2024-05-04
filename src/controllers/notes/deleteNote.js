@@ -2,10 +2,10 @@ import { noteMapper } from "../../mappers/index.js";
 import { checkElementExistsBasedOn } from "../../utils/index.js";
 
 const deleteNote = (repository) => {
-  return (req, res) => {
+  return async (req, res) => {
     const { id: noteId } = req.params;
 
-    const elementIndex = repository.findIndexNoteById(noteId);
+    const elementIndex = await repository.findIndexNoteById(noteId);
 
     const elementExists = checkElementExistsBasedOn({ elementIndex });
 
@@ -15,9 +15,9 @@ const deleteNote = (repository) => {
         .json({ error: `Note with id ${noteId} does not exist` });
     }
 
-    const deletedNote = repository.getNote(elementIndex);
+    const deletedNote = await repository.getNote(elementIndex);
 
-    repository.removeNote(elementIndex);
+    await repository.removeNote(elementIndex);
 
     const deletedNoteDTO = noteMapper.toDTO(deletedNote);
 

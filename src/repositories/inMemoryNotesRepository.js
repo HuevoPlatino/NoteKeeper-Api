@@ -2,31 +2,31 @@ export const inMemoryNotesRepository = (notesCollection) => {
   const notes = notesCollection;
 
   return {
-    getAllNotes() {
+    getAllNotes: async () => {
       return notes;
     },
 
-    getNote(index) {
+    getNote: async (index) => {
       return notes[index];
     },
 
-    addNote(note) {
+    addNote: async (note) => {
       notes.push(note);
     },
 
-    updateNote(index, note) {
+    updateNote: async (index, note) => {
       notes[index] = note;
     },
 
-    removeNote(index) {
+    removeNote: async (index) => {
       return notes.splice(index, 1);
     },
 
-    findIndexNoteById(noteId) {
+    findIndexNoteById: async (noteId) => {
       return notes.findIndex((note) => note._id === noteId);
     },
 
-    removeAllNotes() {
+    removeAllNotes: async () => {
       notes.length = 0;
     }
   };

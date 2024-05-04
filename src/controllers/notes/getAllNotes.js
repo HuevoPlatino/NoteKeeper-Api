@@ -1,8 +1,8 @@
 import { noteMapper } from "../../mappers/index.js";
 
 const getAllNotes = (repository) => {
-  return (_req, res) => {
-    const notes = repository.getAllNotes();
+  return async (_req, res) => {
+    const notes = await repository.getAllNotes();
 
     const notesDTO = notes.map(noteMapper.toDTO);
 
