@@ -1,6 +1,6 @@
 import testServer from "../../../test/testServer";
 import notes from "../data";
-import { inMemoryNotesRepository } from "../repositories/inMemoryNotesRepository";
+import NotesInMemoryRepository from "../repositories/NotesInMemoryRepository.js";
 import notesRouterIoC from "./notesRouter";
 
 jest.mock("../utils/generatePrefixedID.js", () => {
@@ -57,7 +57,7 @@ const updatedNote = {
 
 const mockNotes = [initialNote];
 
-const notesRepository = inMemoryNotesRepository(mockNotes);
+const notesRepository = NotesInMemoryRepository(mockNotes);
 const notesRouter = testServer(notesRouterIoC, notesRepository);
 
 describe("notesRouter", () => {

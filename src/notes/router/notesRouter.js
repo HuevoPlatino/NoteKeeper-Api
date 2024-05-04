@@ -1,25 +1,24 @@
 import { Router } from "express";
 
-import {
-  createNote,
-  deleteNote,
-  getAllNotes,
-  updateNote
-} from "../controllers/index.js";
+import NotesController from "../controllers/NotesController.js";
+import NotesInMemoryRepository from "../repositories/NotesInMemoryRepository.js";
 
-const createNotesRouter = (repository) => {
+const notesInMemoryRepository = NotesInMemoryRepository();
+const notesController = NotesController(notesInMemoryRepository);
+
+const createNotesRouter = () => {
   const notesRouter = Router();
 
-  notesRouter.get("/", getAllNotes(repository));
-  notesRouter.post("/", createNote(repository));
-  notesRouter.put("/:id", updateNote(repository));
-  notesRouter.delete("/:id", deleteNote(repository));
+  notesRouter.get("/", notesController.getAllNotes);
+  notesRouter.post("/", notesController.createNote);
+  notesRouter.put("/:id", notesController.updateNote);
+  notesRouter.delete("/:id", notesController.deleteNote);
 
   return notesRouter;
 };
 
-const notesRouterIoC = (app, repository) => {
-  const notesRouter = createNotesRouter(repository);
+const notesRouterIoC = (app) => {
+  const notesRouter = createNotesRouter();
 
   app.use("/notes", notesRouter);
 };
