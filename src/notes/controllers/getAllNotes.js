@@ -1,4 +1,4 @@
-import { noteMapper } from "../../mappers/index.js";
+import { noteMapper } from "../mappers/index.js";
 
 const getAllNotes = (repository) => {
   return async (_req, res) => {

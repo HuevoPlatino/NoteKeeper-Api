@@ -1,8 +1,9 @@
 import testServer from "../../../test/testServer";
-import { inMemoryNotesRepository } from "../../repositories/inMemoryNotesRepository";
+import notes from "../data";
+import { inMemoryNotesRepository } from "../repositories/inMemoryNotesRepository";
 import notesRouterIoC from "./notesRouter";
 
-jest.mock("../../utils/generatePrefixedID.js", () => {
+jest.mock("../utils/generatePrefixedID.js", () => {
   const noteId = "mockedID-123";
   return jest.fn().mockReturnValue(noteId);
 });
@@ -16,20 +17,12 @@ const MOCKS = {
 
 const invalidId = "456";
 
-const initialNote = {
-  _id: "123",
-  name: "name",
-  description: "description",
-  important: false,
-  status: "pending",
-  due_date: "5/1/2024",
-  created_at: 1714552849902
-};
+const initialNote = notes[0];
 
 const initialNoteDTO = {
   id: "123",
-  name: "name",
-  description: "description",
+  name: "Walk the dog",
+  description: "Go to the park",
   important: false,
   status: "pending",
   due_date: "5/1/2024",

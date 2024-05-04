@@ -1,8 +1,8 @@
-import { noteMapper } from "../../mappers/index.js";
+import { noteMapper } from "../mappers/index.js";
 import {
   checkElementExistsBasedOn,
   checkValidProperties
-} from "../../utils/index.js";
+} from "../utils/index.js";
 
 const updateNote = (repository) => {
   return async (req, res) => {

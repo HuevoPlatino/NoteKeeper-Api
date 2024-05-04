@@ -1,8 +1,8 @@
-import { noteMapper } from "../../mappers/index.js";
+import { noteMapper } from "../mappers/index.js";
 import {
   checkNoteDataIsIncomplete,
   generatePrefixedID
-} from "../../utils/index.js";
+} from "../utils/index.js";
 
 const createNote = (repository) => {
   return async (req, res) => {

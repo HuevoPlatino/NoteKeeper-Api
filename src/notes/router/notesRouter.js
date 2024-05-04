@@ -4,8 +4,8 @@ import {
   createNote,
   deleteNote,
   getAllNotes,
-  updateNote,
-} from "../../controllers/index.js";
+  updateNote
+} from "../controllers/index.js";
 
 const createNotesRouter = (repository) => {
   const notesRouter = Router();

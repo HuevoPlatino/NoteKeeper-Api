@@ -1,5 +1,5 @@
-import { noteMapper } from "../../mappers/index.js";
-import { checkElementExistsBasedOn } from "../../utils/index.js";
+import { noteMapper } from "../mappers/index.js";
+import { checkElementExistsBasedOn } from "../utils/index.js";
 
 const deleteNote = (repository) => {
   return async (req, res) => {
