@@ -1,6 +1,6 @@
 {
   "name": "notekeeper-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "The NoteKeeper REST API, based on Express, is a tool for managing CRUD operations for a notes application.",
   "type": "module",
   "main": "index.js",
