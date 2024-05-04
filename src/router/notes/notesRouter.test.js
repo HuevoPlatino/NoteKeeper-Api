@@ -14,6 +14,8 @@ const MOCKS = {
   DATE_NOW: 39600000
 };
 
+const invalidId = "456";
+
 const initialNote = {
   _id: "123",
   name: "name",
@@ -83,7 +85,9 @@ describe("notesRouter", () => {
     UPDATED: {
       ...initialNoteDTO,
       ...updatedNote
-    }
+    },
+    DELETED: initialNoteDTO,
+    EMPTY: []
   };
 
   beforeEach(() => {
@@ -195,8 +199,6 @@ describe("notesRouter", () => {
     });
 
     test("When note id does note exist Then response should return status 404 with expected error message", async () => {
-      const invalidId = "456";
-
       const {
         status,
         body: { error }
@@ -219,6 +221,29 @@ describe("notesRouter", () => {
   });
 
   describe("Given DELETE action", () => {
-    test.todo("When Then");
+    test("When note id does note exist Then response should return status 404 with expected error message", async () => {
+      const {
+        status,
+        body: { error }
+      } = await notesRouter.delete(`/notes/${invalidId}`);
+
+      expect(status).toBe(EXPECTED_STATUS.NOT_FOUND);
+      expect(error).toBe(`Note with id ${invalidId} does not exist`);
+    });
+
+    test("When note id exists and keys are valid Then response should return updated note with status 200", async () => {
+      const validId = "123";
+
+      const { status, body } = await notesRouter.delete(`/notes/${validId}`);
+
+      expect(status).toBe(EXPECTED_STATUS.OK);
+      expect(body).toEqual(EXPECTED_RESPONSE_DTO.DELETED);
+
+      const {
+        body: { notes }
+      } = await notesRouter.get("/notes");
+
+      expect(notes).toEqual(EXPECTED_RESPONSE_DTO.EMPTY);
+    });
   });
 });
