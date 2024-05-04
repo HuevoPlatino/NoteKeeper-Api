@@ -1,11 +1,11 @@
 import checkElementExistsBasedOn from "./checkElementExistsBasedOn.js";
 import checkNoteDataIsIncomplete from "./checkNoteDataIsIncomplete.js";
 import checkValidProperties from "./checkValidProperties.js";
-import generatePrefixedID from "./generatePrefixedID.js";
+import generateUUID from "./generateUUID.js";
 
 export {
   checkElementExistsBasedOn,
   checkNoteDataIsIncomplete,
   checkValidProperties,
-  generatePrefixedID
+  generateUUID
 };
