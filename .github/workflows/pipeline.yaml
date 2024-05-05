@@ -27,6 +27,13 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: 1.x
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.bun/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
       - name: Install dependencies
         run: bun install
       - name: Lint code
@@ -43,6 +50,13 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: 1.x
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.bun/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
       - name: Install dependencies
         run: bun install
       - name: Test
