@@ -1,5 +1,9 @@
 # NoteKeeper REST API
 
+## Deploy:
+
+- [https://notekeeper-api-x9ji.onrender.com [↗]](https://notekeeper-api-x9ji.onrender.com/)
+
 ## Description:
 
 The **NoteKeeper REST API**, powered by the Express framework, is a tool for managing CRUD operations for a notes application. This API provides developers with routes to create, read, update, and delete notes.
@@ -82,7 +86,7 @@ const newNote = {
   description: string,
   important: boolean,
   status: string("pending" | "in progress" | "done"),
-  dueDate: string("dd/mm/yyyy"),
+  dueDate: string("dd/mm/yyyy")
 };
 ```
 
