@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import cors from "cors";
 import express from "express";
 
@@ -23,13 +22,5 @@ healthRouterIoC(app);
 notesRouterIoC(app, notesInMemoryRepository);
 
 app.listen(PORT, () => {
-  Logger.lineDivider();
-  Logger.lineFeed();
-  Logger.log(
-    chalk.yellow("👋", chalk.bold("Notekeeper API"), `v.${appVersion} is up!`)
-  );
-  Logger.lineFeed();
-  Logger.log(chalk.green(`🚀 Server running at http://localhost:${PORT} ...`));
-  Logger.lineFeed();
-  Logger.lineDivider();
+  Logger.logServerRun({ appVersion, port: PORT });
 });
