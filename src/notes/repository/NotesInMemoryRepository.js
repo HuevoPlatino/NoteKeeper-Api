@@ -2,11 +2,11 @@ import notes from "../data/index.js";
 
 const NotesInMemoryRepository = () => ({
   getAllNotes: async () => {
-    return notes;
+    return notes ?? [];
   },
 
   getNote: async (index) => {
-    return notes[index];
+    return notes[index] ?? null;
   },
 
   addNote: async (note) => {
