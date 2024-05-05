@@ -1,13 +1,9 @@
 import { Router } from "express";
-
 import NotesController from "../controllers/NotesController.js";
-import NotesInMemoryRepository from "../repository/NotesInMemoryRepository.js";
 
-const notesInMemoryRepository = NotesInMemoryRepository();
-const notesController = NotesController(notesInMemoryRepository);
-
-const createNotesRouter = () => {
+const createNotesRouter = (repository) => {
   const notesRouter = Router();
+  const notesController = NotesController(repository);
 
   notesRouter.get("/", notesController.getAllNotes);
   notesRouter.post("/", notesController.createNote);
@@ -17,8 +13,8 @@ const createNotesRouter = () => {
   return notesRouter;
 };
 
-const notesRouterIoC = (app) => {
-  const notesRouter = createNotesRouter();
+const notesRouterIoC = (app, repository) => {
+  const notesRouter = createNotesRouter(repository);
 
   app.use("/notes", notesRouter);
 };
