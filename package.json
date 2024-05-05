@@ -35,6 +35,6 @@
     "supertest": "7.0.0"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.js": "npm run lint"
   }
 }
