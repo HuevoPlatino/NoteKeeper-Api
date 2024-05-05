@@ -109,7 +109,12 @@ describe("notesRouter", () => {
 
   describe("Given POST action", () => {
     test("When a new note is sent with missing name Then response should return status 404 with expected error message", async () => {
-      const { name, ...newNoteWithMissingName } = newNote;
+      const newNoteWithMissingName = {
+        description: newNote.description,
+        important: newNote.important,
+        status: newNote.status,
+        dueDate: newNote.dueDate
+      };
 
       const { status, body } = await notesRouter
         .post("/notes")
@@ -120,7 +125,12 @@ describe("notesRouter", () => {
     });
 
     test("When a new note is sent with missing description Then response should return status 404 with expected error message", async () => {
-      const { description, ...newNoteWithMissingDescription } = newNote;
+      const newNoteWithMissingDescription = {
+        name: newNote.name,
+        important: newNote.important,
+        status: newNote.status,
+        dueDate: newNote.dueDate
+      };
 
       const { status, body } = await notesRouter
         .post("/notes")
@@ -131,7 +141,12 @@ describe("notesRouter", () => {
     });
 
     test("When a new note is sent with missing important Then response should return status 404 with expected error message", async () => {
-      const { important, ...newNoteWithMissingImportant } = newNote;
+      const newNoteWithMissingImportant = {
+        name: newNote.name,
+        description: newNote.description,
+        status: newNote.status,
+        dueDate: newNote.dueDate
+      };
 
       const { status, body } = await notesRouter
         .post("/notes")
@@ -142,7 +157,12 @@ describe("notesRouter", () => {
     });
 
     test("When a new note is sent with missing status Then response should return status 404 with expected error message", async () => {
-      const { status: noteStatus, ...newNoteWithMissingStatus } = newNote;
+      const newNoteWithMissingStatus = {
+        name: newNote.name,
+        description: newNote.description,
+        important: newNote.important,
+        dueDate: newNote.dueDate
+      };
 
       const { status, body } = await notesRouter
         .post("/notes")
@@ -153,7 +173,12 @@ describe("notesRouter", () => {
     });
 
     test("When a new note is sent with missing dueDate Then response should return status 404 with expected error message", async () => {
-      const { dueDate, ...newNoteWithDueDate } = newNote;
+      const newNoteWithDueDate = {
+        name: newNote.name,
+        description: newNote.description,
+        important: newNote.important,
+        status: newNote.status
+      };
 
       const { status, body } = await notesRouter
         .post("/notes")
