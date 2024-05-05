@@ -52,10 +52,12 @@ describe("NotesInMemoryRepository", () => {
   });
 
   describe("Given getAllNotes", () => {
-    test("When method is called and index does not exist Then null should be returned", async () => {
+    test("When method is called Then notes collection be returned", async () => {
       const notes = await repository.getAllNotes();
-
       expect(notes).toHaveLength(EXPECTED_RESULT.LENGTH_ZERO);
+
+      await repository.addNote(mockNote1);
+      expect(notes).toHaveLength(EXPECTED_RESULT.LENGTH_ONE);
     });
   });
 
@@ -155,6 +157,7 @@ describe("NotesInMemoryRepository", () => {
 
       await repository.addNote(mockNote1);
       await repository.addNote(mockNote2);
+
       expect(notesCollection).toHaveLength(EXPECTED_RESULT.LENGTH_TWO);
 
       await repository.removeAllNotes();
