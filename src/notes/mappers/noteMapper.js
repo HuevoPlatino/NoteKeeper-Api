@@ -1,6 +1,7 @@
-const toDTO = ({ _id, created_at, ...restOfNote }) => ({
+const toDTO = ({ _id, created_at, due_date, ...restOfNote }) => ({
   id: _id,
   createdAt: created_at,
+  dueDate: due_date,
   ...restOfNote
 });
 
