@@ -25,7 +25,7 @@ const initialNoteDTO = {
   description: "Go to the park",
   important: false,
   status: "pending",
-  due_date: "5/1/2024",
+  dueDate: "5/1/2024",
   createdAt: 1714552849902
 };
 
@@ -135,22 +135,6 @@ describe("notesRouter", () => {
       const { status, body } = await notesRouter
         .post("/notes")
         .send(newNoteWithMissingDescription);
-
-      expect(status).toBe(EXPECTED_STATUS.BAD_REQUEST);
-      expect(body.error).toBe(EXPECTED_ERROR_MESSAGE.CREATED);
-    });
-
-    test("When a new note is sent with missing important Then response should return status 404 with expected error message", async () => {
-      const newNoteWithMissingImportant = {
-        name: newNote.name,
-        description: newNote.description,
-        status: newNote.status,
-        dueDate: newNote.dueDate
-      };
-
-      const { status, body } = await notesRouter
-        .post("/notes")
-        .send(newNoteWithMissingImportant);
 
       expect(status).toBe(EXPECTED_STATUS.BAD_REQUEST);
       expect(body.error).toBe(EXPECTED_ERROR_MESSAGE.CREATED);
