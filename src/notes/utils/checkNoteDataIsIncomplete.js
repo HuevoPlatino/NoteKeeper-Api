@@ -4,7 +4,6 @@ const checkNoteDataIsIncomplete = (note) => {
     !note?.name?.trim() ||
     !note?.description ||
     !note?.description?.trim() ||
-    !note?.important ||
     !note?.status ||
     !note?.status?.trim() ||
     !note?.dueDate ||
