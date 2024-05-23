@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev:watch": "NODE_ENV=development node --watch --env-file=.env index.js",
-    "start": "NODE_ENV=production node --env-file=.env index.js",
+    "dev:watch": "NODE_ENV=development & node --watch --env-file=.env index.js",
+    "start": "NODE_ENV=production & node --env-file=.env index.js",
     "test": "NODE_ENV=test jest",
     "test:watch": "jest --watch",
     "lint": "eslint . --max-warnings 0",
